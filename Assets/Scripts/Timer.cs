@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField]
+    //[SerializeField]
     float timeMultiplier = 1f;
 
     Action onResetTimer;
