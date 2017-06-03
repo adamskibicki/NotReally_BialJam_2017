@@ -11,14 +11,17 @@ public class CameraMoving : MonoBehaviour
 
     Vector3 moveVector;
 
+    Rigidbody2D body;
+
     private void Start()
     {
+        body = GetComponent<Rigidbody2D>();
         moveVector = transform.up;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        transform.Translate(moveVector * speed * Time.deltaTime);
+        body.velocity= moveVector * speed;
         speed += Time.deltaTime * 2f;
     }
 

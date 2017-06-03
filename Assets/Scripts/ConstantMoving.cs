@@ -12,7 +12,7 @@ public class ConstantMoving : MonoBehaviour, IMovingSpeed
 
     public float SpeedBoost()
     {
-        throw new NotImplementedException();
+        return speed;
     }
 
     private void Start()
@@ -22,9 +22,7 @@ public class ConstantMoving : MonoBehaviour, IMovingSpeed
 
     private void Update()
     {
-        body.velocity = (transform.up * speed * Time.deltaTime);
         speed += Time.deltaTime*2f;
     }
-
 }
 

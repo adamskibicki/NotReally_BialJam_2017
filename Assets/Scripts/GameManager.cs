@@ -12,7 +12,6 @@ public enum Quest
     SurviveChanges
 }
 
-
 public class GameManager : Singleton<GameManager>
 {
 
@@ -41,12 +40,14 @@ public class GameManager : Singleton<GameManager>
     void TurnMap()
     {
         List<PlayerRotation> rotations = FindObjectsOfType<PlayerRotation>().ToList();
+        List<PlayerMoving> movings = FindObjectsOfType<PlayerMoving>().ToList();
 
         Debug.Log("Rotations " + rotations.Count);
         int turnValue = UnityEngine.Random.Range(1, 4);
         Vector3 turnVector = new Vector3(0, 0, 90 * turnValue);
 
-
+        foreach (PlayerMoving moving in movings)
+            moving.SnapToGrid();
         foreach (PlayerRotation rotate in rotations)
             rotate.Rotate(turnVector);
 

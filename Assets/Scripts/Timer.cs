@@ -9,7 +9,6 @@ public class Timer : MonoBehaviour
     [SerializeField]
     float timeMultiplier = 1f;
 
-
     Action onResetTimer;
     const float SliderResetTimer = 10f;
 
