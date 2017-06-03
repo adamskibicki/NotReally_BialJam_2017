@@ -7,7 +7,7 @@ public class LethalObjectTrigger : MonoBehaviour {
     {
         if(collision.tag == "Player")
         {
-            Destroy(collision.gameObject);
+            collision.GetComponent<PlayerDeathCondition>().Kill();
         }
     }
 }

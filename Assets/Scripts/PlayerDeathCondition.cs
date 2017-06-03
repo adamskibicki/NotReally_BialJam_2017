@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class PlayerDeathCondition : MonoBehaviour {
 
-
     public void Kill()
     {
-        Debug.Log("gine");
-     //   Destroy(this.gameObject);
+
+        Destroy(gameObject);
     }
 }
