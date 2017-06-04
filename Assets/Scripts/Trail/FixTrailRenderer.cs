@@ -8,6 +8,7 @@ public class FixTrailRenderer : MonoBehaviour
     {
         TrailRenderer go = gameObject.GetComponent<TrailRenderer>();
         go.sortingLayerName =  "Player";
-        go.sortingOrder = 0;
+        go.sortingOrder = 1;
+
     }
 }
