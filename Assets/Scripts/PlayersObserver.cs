@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,7 +8,6 @@ using UnityEngine.UI;
 public class PlayersObserver : MonoBehaviour
 {
     int players = 0;
-    bool lost = false;
 
     [SerializeField]
     Text playersLeftText;
@@ -33,9 +31,7 @@ public class PlayersObserver : MonoBehaviour
         }
 
         if (players == 0)
-        {
             Lose();
-        }
     }
 
     private void UpdateUI()
@@ -45,17 +41,12 @@ public class PlayersObserver : MonoBehaviour
 
     private void Lose()
     {
-        lost = true;
-        StartCoroutine(WaitThenShowButton());
+        StartCoroutine(WaitThenReload());
     }
 
-    private IEnumerator WaitThenShowButton()
+    private IEnumerator WaitThenReload()
     {
         yield return new WaitForSeconds(1f);
-    }
-
-    private void ResetGameNow()
-    {
         resetGame.ResetGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

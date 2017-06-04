@@ -46,11 +46,6 @@ public class CoinsManager : MonoBehaviour, IResetGame
         }
     }
 
-    public int GetCoinsAmount()
-    {
-        return coinsAchieved;
-    }
-
     void UpdateUI()
     {
         coinsAchievedText.text = coinsAchieved.ToString();
