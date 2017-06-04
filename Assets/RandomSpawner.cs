@@ -36,8 +36,8 @@ public class RandomSpawner : MonoBehaviour
         int xOffset = (int)((CameraTransform.position.x - cameraInitialPosition.x) / 4);
         int yOffset = (int)((CameraTransform.position.y - cameraInitialPosition.y) / 4);
 
-        float worldXOffset = Mathf.RoundToInt(Mathf.Abs(bottomLeft.x / 4)) * 4 + 10;
-        float worldYOffset = Mathf.RoundToInt(Mathf.Abs(bottomLeft.y / 4)) * 4 + 10;
+        float worldXOffset = Mathf.RoundToInt(Mathf.Abs(bottomLeft.x / 4)) * 12 + 10;
+        float worldYOffset = Mathf.RoundToInt(Mathf.Abs(bottomLeft.y / 4)) * 12 + 10;
 
         if (xOffset > prevoiusXOffset)
         {
