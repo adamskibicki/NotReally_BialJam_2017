@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FixTrailRenderer : MonoBehaviour {
+public class FixTrailRenderer : MonoBehaviour
+{
     
-	void Start () {
+	void Awake ()
+    {
         TrailRenderer go = gameObject.GetComponent<TrailRenderer>();
         go.sortingLayerName =  "Player";
-        go.sortingOrder = 1;
+        go.sortingOrder = 0;
     }
 }
