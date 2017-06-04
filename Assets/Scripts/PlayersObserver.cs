@@ -16,20 +16,6 @@ public class PlayersObserver : MonoBehaviour
     [SerializeField]
     GameReset resetGame;
 
-    private void OnGUI()
-    {
-        int coins = GameObject.FindGameObjectWithTag("GameController").GetComponent<CoinsManager>().GetCoinsAmount();
-        int width = 200;
-        int height = 150;
-        if (lost)
-        {
-            if(GUI.Button(new Rect(Screen.width / 2 - width / 2, Screen.height / 2 - height / 2, width, height), "You got " + coins + " coins!"))
-            {
-                ResetGameNow();
-            }
-        }
-    }
-
     void Update ()
     {
         CountChildren();
@@ -59,14 +45,13 @@ public class PlayersObserver : MonoBehaviour
 
     private void Lose()
     {
-
+        lost = true;
         StartCoroutine(WaitThenShowButton());
     }
 
     private IEnumerator WaitThenShowButton()
     {
         yield return new WaitForSeconds(1f);
-        lost = true;
     }
 
     private void ResetGameNow()
