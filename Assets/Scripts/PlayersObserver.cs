@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,11 +9,26 @@ using UnityEngine.UI;
 public class PlayersObserver : MonoBehaviour
 {
     int players = 0;
+    bool lost = false;
 
     [SerializeField]
     Text playersLeftText;
     [SerializeField]
     GameReset resetGame;
+
+    private void OnGUI()
+    {
+        int coins = GameObject.FindGameObjectWithTag("GameController").GetComponent<CoinsManager>().GetCoinsAmount();
+        int width = 200;
+        int height = 150;
+        if (lost)
+        {
+            if(GUI.Button(new Rect(Screen.width / 2 - width / 2, Screen.height / 2 - height / 2, width, height), "You got " + coins + " coins!"))
+            {
+                ResetGameNow();
+            }
+        }
+    }
 
     void Update ()
     {
@@ -31,7 +47,9 @@ public class PlayersObserver : MonoBehaviour
         }
 
         if (players == 0)
+        {
             Lose();
+        }
     }
 
     private void UpdateUI()
@@ -41,12 +59,18 @@ public class PlayersObserver : MonoBehaviour
 
     private void Lose()
     {
-        StartCoroutine(WaitThenReload());
+
+        StartCoroutine(WaitThenShowButton());
     }
 
-    private IEnumerator WaitThenReload()
+    private IEnumerator WaitThenShowButton()
     {
         yield return new WaitForSeconds(1f);
+        lost = true;
+    }
+
+    private void ResetGameNow()
+    {
         resetGame.ResetGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
