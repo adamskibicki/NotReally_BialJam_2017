@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    //[SerializeField]
+    [SerializeField]
     float timeMultiplier = 1f;
 
     Action onResetTimer;

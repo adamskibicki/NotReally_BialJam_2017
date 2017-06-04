@@ -8,12 +8,14 @@ public class PlayerMoving : MonoBehaviour
     const float objectSize = 4f;
     float vertical;
     Rigidbody2D body;
-    ConstantMoving constMove;
+    PlayersSpeed speed;
 
     private void Start()
     {
-        constMove = GetComponent<ConstantMoving>();
         body = GetComponent<Rigidbody2D>();
+        speed = transform.parent.GetComponent<PlayersSpeed>();
+        transform.Rotate(new Vector3(0,0, FindObjectOfType<GameManager>().currentZValue));
+        SnapToGrid();
     }
 
     void Update()
@@ -37,7 +39,7 @@ public class PlayerMoving : MonoBehaviour
 
     private Vector3 BoostFromConstantMove()
     {
-        return transform.up * constMove.SpeedBoost();
+        return transform.up * speed.GetPlayerSpeed();
     }
 
     private Vector3 BoostFromController()

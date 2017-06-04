@@ -7,6 +7,6 @@ public class PlayerKillTrigger : MonoBehaviour {
 
     internal void ExecuteKillAnimation()
     {
-        throw new NotImplementedException();
+       // throw new NotImplementedException();
     }
 }

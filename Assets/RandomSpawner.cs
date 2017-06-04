@@ -93,10 +93,13 @@ public class RandomSpawner : MonoBehaviour
             while (x * 4 <= worldXOffset * 2)
             {
                 GameObject go = GetFreeObstacle();
-                go.SetActive(true);
-                go.transform.position = cameraInitialPosition + new Vector3(-worldXOffset + x * 4 + xOffset * 4, worldYOffset + yOffset * 4);
-                int r = Random.Range(randMin, randMax);
-                x += r;
+                if(go != null)
+                {
+                    go.SetActive(true);
+                    go.transform.position = cameraInitialPosition + new Vector3(-worldXOffset + x * 4 + xOffset * 4, worldYOffset + yOffset * 4);
+                    int r = Random.Range(randMin, randMax);
+                    x += r;
+                }
             }
         }
     }

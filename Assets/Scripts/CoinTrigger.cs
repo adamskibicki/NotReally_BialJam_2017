@@ -7,21 +7,31 @@ public class CoinTrigger : MonoBehaviour
 {
     Action OnPlayerInteraction;
 
+    private void Start()
+    {
+        OnPlayerInteraction += FindObjectOfType<CoinsManager>().CoinAchieved;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
             collision.GetComponent<PlayerKillTrigger>().ExecuteKillAnimation();
-            GotKilledAnimation();
 
             if (OnPlayerInteraction != null)
                 OnPlayerInteraction();
+            GotKilledAnimation();
+
+
+        
         }
     }
 
     private void GotKilledAnimation()
     {
-        throw new NotImplementedException();
+        Destroy(gameObject);
+        //throw new NotImplementedException();
+        
     }
 
     public void AddOnTriggerAction(Action x)

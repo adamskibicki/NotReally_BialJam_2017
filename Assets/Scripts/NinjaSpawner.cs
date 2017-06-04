@@ -14,6 +14,6 @@ public class NinjaSpawner : MonoBehaviour
 
     internal void Spawn()
     {
-        Instantiate(ninjaPrefab, spawnPoint.transform.position, new Quaternion(), playersContainer.transform);
+        GameObject current = Instantiate(ninjaPrefab, spawnPoint.transform.position + new Vector3(0,0,10), new Quaternion(), playersContainer.transform);
     }
 }

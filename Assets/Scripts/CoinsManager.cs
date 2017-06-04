@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CoinsManager : MonoBehaviour
+public class CoinsManager : MonoBehaviour, IResetGame
 {
     int currentLevel;
     int coinsAchieved;
@@ -20,15 +20,13 @@ public class CoinsManager : MonoBehaviour
 
     private void Start()
     {
-        coinsAchieved = 0;
-        currentLevel = 1;
+        OnResetGame();
     }
 
-    void AssignCoins()
+    public void OnResetGame()
     {
-        CoinTrigger[] triggers = GameObject.FindObjectsOfType<CoinTrigger>();
-        foreach (CoinTrigger trigger in triggers)
-            trigger.AddOnTriggerAction(CoinAchieved);
+        coinsAchieved = 0;
+        currentLevel = 1;
     }
 
     public void CoinAchieved()
@@ -40,7 +38,7 @@ public class CoinsManager : MonoBehaviour
 
     private void CheckNextLevel()
     {
-        if (coinsAchieved == Mathf.Pow(currentLevel, 2))
+        if (coinsAchieved == Mathf.RoundToInt(Mathf.Pow(currentLevel, 1.5f))) 
         {
             currentLevel++;
             spawner.Spawn();

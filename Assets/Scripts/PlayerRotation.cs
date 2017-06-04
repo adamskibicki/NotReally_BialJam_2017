@@ -1,11 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRotation : MonoBehaviour
+public class PlayerRotation : MonoBehaviour, IResetGame
 {
-    public void Rotate(Vector3 rotationValue)
+    public void OnResetGame()
     {
-        transform.Rotate(rotationValue);
+        Rotate(0);
+    }
+
+    public void Rotate(float rotationValue)
+    {
+        transform.eulerAngles = new Vector3(0, 0, rotationValue);
     }
 }

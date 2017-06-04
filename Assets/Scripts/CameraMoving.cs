@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMoving : MonoBehaviour
+public class CameraMoving : MonoBehaviour, IResetGame
 {
 
     [SerializeField]
@@ -16,6 +16,11 @@ public class CameraMoving : MonoBehaviour
     private void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        OnResetGame();
+    }
+
+    public void OnResetGame()
+    {
         moveVector = transform.up;
     }
 
@@ -52,4 +57,5 @@ public class CameraMoving : MonoBehaviour
         }
 
     }
+
 }

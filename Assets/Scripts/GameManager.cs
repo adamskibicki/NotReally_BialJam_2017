@@ -5,16 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum Quest
+public class GameManager : MonoBehaviour, IResetGame
 {
-    Kill,
-    SurviveTime,
-    SurviveChanges
-}
-
-public class GameManager : Singleton<GameManager>
-{
-
     [SerializeField]
     Timer timeSlider;
     [SerializeField]
@@ -22,19 +14,17 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     CameraMoving cameraMoving;
 
-    [SerializeField]
-    Text changesToWinText;
+    public float currentZValue { get; private set; }
 
-    int amountChangesToWin;
-
-    float currentZValue;
+    public void OnResetGame()
+    {
+        currentZValue = 0;
+        timeSlider.AddActionOnResetTimer(TurnMap);
+    }
 
     private void Start()
     {
-        currentZValue = 0;
-        amountChangesToWin = 5;
-        timeSlider.AddActionOnResetTimer(TurnMap);
-        timeSlider.AddActionOnResetTimer(DecreaseChangesToWin);
+        OnResetGame();
     }
 
     void TurnMap()
@@ -44,29 +34,14 @@ public class GameManager : Singleton<GameManager>
 
         Debug.Log("Rotations " + rotations.Count);
         int turnValue = UnityEngine.Random.Range(1, 4);
-        Vector3 turnVector = new Vector3(0, 0, 90 * turnValue);
+        currentZValue += turnValue*90;
 
         foreach (PlayerMoving moving in movings)
             moving.SnapToGrid();
+
         foreach (PlayerRotation rotate in rotations)
-            rotate.Rotate(turnVector);
+            rotate.Rotate(currentZValue);
 
-        currentZValue += turnVector.z;
         cameraMoving.MoveDirection(new Vector3(0, 0, currentZValue));
-    }
-
-    void DecreaseChangesToWin()
-    {
-        amountChangesToWin--;
-        changesToWinText.text = amountChangesToWin.ToString();
-        if (amountChangesToWin <= 0)
-        {
-            Win();
-        }
-    }
-
-    private void Win()
-    {
-
     }
 }
