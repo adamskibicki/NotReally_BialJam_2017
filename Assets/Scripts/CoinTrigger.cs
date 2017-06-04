@@ -6,9 +6,11 @@ using UnityEngine;
 public class CoinTrigger : MonoBehaviour
 {
     Action OnPlayerInteraction;
+    Animator animator;
 
     private void Start()
     {
+        animator = transform.GetChild(0).GetComponent<Animator>();
         OnPlayerInteraction += FindObjectOfType<CoinsManager>().CoinAchieved;
     }
 
@@ -29,9 +31,13 @@ public class CoinTrigger : MonoBehaviour
 
     private void GotKilledAnimation()
     {
-        Destroy(gameObject);
-        //throw new NotImplementedException();
-        
+        animator.SetTrigger("Dead");
+        StartCoroutine(WaitThenDie());
+    }
+
+    private IEnumerator WaitThenDie()
+    {
+        yield return new WaitForSeconds(1.5f);
     }
 
     public void AddOnTriggerAction(Action x)
