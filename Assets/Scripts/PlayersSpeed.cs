@@ -9,7 +9,7 @@ public class PlayersSpeed : MonoBehaviour
 
     private void Update()
     {
-        speed += Time.deltaTime * 2f;
+        speed += Time.deltaTime * 1.3f;
     }
 
     public float GetPlayerSpeed()
