@@ -36,6 +36,11 @@ public class CoinsManager : MonoBehaviour, IResetGame
         UpdateUI();
     }
 
+    public int GetScore()
+    {
+        return coinsAchieved;
+    }
+
     private void CheckNextLevel()
     {
         if (coinsAchieved == Mathf.RoundToInt(Mathf.Pow(currentLevel, 1.5f))) 

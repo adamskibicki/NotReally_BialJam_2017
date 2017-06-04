@@ -6,29 +6,23 @@ using UnityEngine;
 public class PlayerMoving : MonoBehaviour
 {
     const float objectSize = 4f;
-    float vertical;
     Rigidbody2D body;
     PlayersSpeed speed;
+    PlayersObserver observer;
 
     private void Start()
     {
+        observer = transform.parent.GetComponent<PlayersObserver>();
         body = GetComponent<Rigidbody2D>();
         speed = transform.parent.GetComponent<PlayersSpeed>();
-        transform.Rotate(new Vector3(0,0, FindObjectOfType<GameManager>().currentZValue));
+        transform.Rotate(new Vector3(0,0, FindObjectOfType<GameManager>().CurrentZValue));
         SnapToGrid();
     }
 
-    void Update()
-    {
-        GetAxis();
-    }
-
-    private void FixedUpdate()
+    private void Update()
     {
         ExecuteMove();
     }
-
-    private bool left, right;
 
     private void ExecuteMove()
     {
@@ -44,19 +38,17 @@ public class PlayerMoving : MonoBehaviour
 
     private Vector3 BoostFromController()
     {
-        return transform.up * vertical * 20f;
+        return transform.up * observer.vertical * 20f;
     }
 
     private void Turn()
     {
         float validTransform = 0;
 
-        if (left)
+        if (observer.left)
             validTransform = -objectSize;
-        if (right)
+        if (observer.right)
             validTransform = objectSize;
-
-        left = right = false;
 
         transform.localPosition += transform.right * validTransform;
     }
@@ -72,8 +64,6 @@ public class PlayerMoving : MonoBehaviour
     {
         //left = Input.GetButtonDown("LeftMove");
         //right = Input.GetButtonDown("RightMove");
-        left = Input.GetKeyDown(KeyCode.A);
-        right = Input.GetKeyDown(KeyCode.D);
-        vertical = Input.GetAxis("Vertical");
+
     }
 }
