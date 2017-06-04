@@ -14,10 +14,24 @@ public class PlayersObserver : MonoBehaviour
     [SerializeField]
     GameReset resetGame;
 
+    [HideInInspector]
+    public bool left;
+    [HideInInspector]
+    public bool right;
+    [HideInInspector]
+    public float vertical;
+
+    [SerializeField]
+    GameObject inputModal;
+
     void Update ()
     {
         CountChildren();
         UpdateUI();
+
+        left = Input.GetKeyDown(KeyCode.A);
+        right = Input.GetKeyDown(KeyCode.D);
+        vertical = Input.GetAxis("Vertical");
     }
 
     private void CountChildren()
@@ -47,7 +61,7 @@ public class PlayersObserver : MonoBehaviour
     private IEnumerator WaitThenReload()
     {
         yield return new WaitForSeconds(1f);
-        resetGame.ResetGame();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 0;
+        inputModal.SetActive(true);
     }
 }

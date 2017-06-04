@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour, IResetGame
@@ -13,15 +14,23 @@ public class GameManager : MonoBehaviour, IResetGame
     GameObject players;
     [SerializeField]
     CameraMoving cameraMoving;
+    [SerializeField]
+    GameReset resetGame;
 
-    public float currentZValue { get; private set; }
+    public float CurrentZValue { get; private set; }
 
     public void OnResetGame()
     {
-        currentZValue = 0;
+        CurrentZValue = 0;
         timeSlider.AddActionOnResetTimer(TurnMap);
     }
 
+    public void ResetGame()
+    {
+        resetGame.ResetGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
+    }
     private void Start()
     {
         OnResetGame();
@@ -34,14 +43,14 @@ public class GameManager : MonoBehaviour, IResetGame
 
         Debug.Log("Rotations " + rotations.Count);
         int turnValue = UnityEngine.Random.Range(1, 4);
-        currentZValue += turnValue*90;
+        CurrentZValue += turnValue*90;
 
         foreach (PlayerMoving moving in movings)
             moving.SnapToGrid();
 
         foreach (PlayerRotation rotate in rotations)
-            rotate.Rotate(currentZValue);
+            rotate.Rotate(CurrentZValue);
 
-        cameraMoving.MoveDirection(new Vector3(0, 0, currentZValue));
+        cameraMoving.MoveDirection(new Vector3(0, 0, CurrentZValue));
     }
 }
