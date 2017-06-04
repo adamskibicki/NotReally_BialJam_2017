@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FixTrailRenderer : MonoBehaviour
 {
-    
 	void Awake ()
     {
         TrailRenderer go = gameObject.GetComponent<TrailRenderer>();

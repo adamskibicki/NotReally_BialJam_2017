@@ -106,13 +106,13 @@ public class RandomSpawner : MonoBehaviour
 
     private GameObject GetFreeObstacle()
     {
-        if (freeObjects.Count > 0)
-        {
-            GameObject last = freeObjects.Last();
-            freeObjects.RemoveAt(freeObjects.Count - 1);
-            return last;
-        }
-        else
+        //if (freeObjects.Count > 0)
+        //{
+        //    GameObject last = freeObjects.Last();
+        //    freeObjects.RemoveAt(freeObjects.Count - 1);
+        //    return last;
+        //}
+        //else
         {
             GameObject nw = Instantiate(GetRandomObstaclePrefab());
             return nw;
