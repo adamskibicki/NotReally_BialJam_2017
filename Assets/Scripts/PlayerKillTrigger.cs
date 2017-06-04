@@ -3,10 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerKillTrigger : MonoBehaviour {
+public class PlayerKillTrigger : MonoBehaviour
+{
+
+    Animator animator;
+    private void Start()
+    {
+        animator = transform.GetChild(0).GetComponent<Animator>();
+    }
 
     internal void ExecuteKillAnimation()
     {
-       // throw new NotImplementedException();
+        animator.SetTrigger("Attack");
     }
 }
